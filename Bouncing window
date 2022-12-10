@@ -1,0 +1,50 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Main {
+  public static void main(String[] args) {
+    JFrame frame = new JFrame();
+    JLabel label = new JLabel("For science, you monster");
+    frame.add(label);
+    frame.setSize(300, 100);
+    frame.setVisible(true);
+    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+    frame.addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        JFrame frame = new JFrame();
+        JLabel label = new JLabel("For science, you monster");
+        frame.add(label);
+        frame.setSize(300, 100);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(this);
+      }
+    });
+
+    int x = 0;
+    int y = 0;
+    int dx = 2;
+    int dy = 2;
+
+    while (true) {
+      x += dx;
+      y += dy;
+      frame.setLocation(x, y);
+
+      if (x < 0 || x + frame.getWidth() > Toolkit.getDefaultToolkit().getScreenSize().width) {
+        dx *= -1;
+      }
+      if (y < 0 || y + frame.getHeight() > Toolkit.getDefaultToolkit().getScreenSize().height) {
+        dy *= -1;
+      }
+
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) {
+        // do nothing
+      }
+    }
+  }
+}
